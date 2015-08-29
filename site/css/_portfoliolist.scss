@@ -1,0 +1,130 @@
+.portfoliolist {
+	header {
+		border-bottom: $divider solid $darkblue;
+		padding: 2*$padding 0;
+
+		h1 {
+			font-family: 'Bangers', cursive;
+			font-size: 3em;
+			text-align: center;
+			padding-top: $padding/2;
+		}
+		h2 {
+			font-size: 1em;
+			text-align: center;
+		}
+	}
+	aside {
+		border-bottom: $divider solid $darkblue;
+		padding: $padding;
+
+		form {
+			padding: $padding 0;
+		}	
+		fieldset {
+			border-radius: $radius;
+		}
+		@media only screen and (min-width: $break1) {
+			fieldset {
+				width: 60%;
+			}
+		}
+		@media only screen and (min-width: $break2) {
+			fieldset {
+				width: 40%;
+			}
+		}
+		legend {
+			font-weight: bold;
+		}
+		.row {
+			padding: $padding;
+			height: 2em;
+		}
+		label {
+			cursor: pointer;
+			float: left;
+			padding-right: $padding;
+			line-height: 2em;
+		}
+		input[type=number] {
+			font-size: inherit;
+			color: inherit;
+			width: 4em;
+			float: left;
+			line-height: 2em;
+			margin-right: $margin;
+		}
+		input[type=number]:focus {
+			outline-color: $darkblue;
+			outline-width: 0.4em;
+		}
+		input[type=submit] {
+			font-size: inherit;
+			color: inherit;
+			width: 7em;
+			float: left;
+			line-height: 2em;
+			border-radius: 0.5em;
+			background: linear-gradient(to bottom,$darkblue 0%,$lightblue 100%);
+		}
+		input[type=submit]:disabled {
+			opacity: 0.5;
+		}
+		h3 {
+			padding: $padding 0;
+		}
+		p {
+			padding: $padding 0;
+			clear: both;
+		}
+	}
+	main {
+		padding: $padding 0;
+	}
+	.panel {
+		float: left;
+
+		.panel-heading {
+			font-size: 1.1em;
+			text-align: center;
+		}
+		.panel-body {
+			width: 160px;
+			height: 160px;
+			background: $lightblue url(images/frame-ls.gif) no-repeat center;
+			margin: 5px 3px;
+
+			img {
+				border: 1px solid #444;
+				border-color: #444 #aaa #aaa #444;
+			}
+		}
+		&.pt .panel-body {
+			background-image: url(images/frame-pt.gif);
+		}
+		&.ls img {
+			margin: 29px 15px; 
+		}
+		&.pt img {
+			margin: 15px 29px;
+		}
+	}
+	@media only screen and (min-width: $break2) {
+		aside .panel.ng-enter {
+			animation: slideInRight 0.7s both ease-in; 
+		}
+		@keyframes slideInRight {
+			from  { transform: translateX(1000%); }
+			to    { transform: translateX(0); }
+		}
+		main .panel.ng-hide {
+			animation: slideOutRight 0.7s both ease-in;
+		}
+		@keyframes slideOutRight {
+			from  { transform: translateX(0); }
+			to    { transform: translateX(1000%); }
+		}			
+	}
+}
+

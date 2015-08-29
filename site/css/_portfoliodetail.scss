@@ -1,0 +1,59 @@
+.portfoliodetail {
+	header {
+		border-bottom: $divider solid $darkblue;
+		padding: $padding;
+
+		a {
+			text-decoration: none;
+
+			&:hover, &:focus {
+				background-color: $darkblue;
+				color: $white;
+			}
+		}
+		@media only screen and (min-width: $break1) {
+			nav {
+				float: left;
+			}
+			span {
+				float: right;
+			}
+		}
+	}
+	main {
+		padding: $padding 0;
+
+		.panel-large {
+			h1 {
+				text-align: center;
+			}
+			dl {
+				text-align: center;
+			}
+			dt {
+				font-weight: bold;
+			}
+			img {
+				display: block;
+				box-sizing: border-box;
+				border: $white solid 5px;
+				box-shadow: 0.25em 0.25em 0.3em $gray;
+				margin: $margin auto;
+				max-width: 100%
+			}
+			button {
+				font-size: inherit;
+				color: inherit;
+				width: 8em;
+				line-height: 2em;
+				border-radius: 0.5em;
+				background: linear-gradient(to bottom,$darkblue 0%,$lightblue 100%);
+				display: block;
+				margin: 0 auto;
+			}
+			button:disabled {
+				opacity: 0.5;
+			}
+		}
+	}
+}

@@ -1,0 +1,220 @@
+/* Colors */
+/* Breakpoints */
+/* Padding, Border, Margins, ... */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fff;
+  color: #30302e;
+  font-family: "Trebuchet MS", "Lucida Grande", "lucida sans unicode", sans-serif;
+}
+
+.wrapper {
+  max-width: 60em;
+  min-height: 60em;
+  margin: 0 auto;
+  padding: 0 0.5em 0.5em;
+  background-color: #eed;
+}
+
+.alert {
+  color: #F93;
+}
+
+.clear:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.portfoliolist header {
+  border-bottom: 0.25em solid #174573;
+  padding: 1em 0;
+}
+.portfoliolist header h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 3em;
+  text-align: center;
+  padding-top: 0.25em;
+}
+.portfoliolist header h2 {
+  font-size: 1em;
+  text-align: center;
+}
+.portfoliolist aside {
+  border-bottom: 0.25em solid #174573;
+  padding: 0.5em;
+}
+.portfoliolist aside form {
+  padding: 0.5em 0;
+}
+.portfoliolist aside fieldset {
+  border-radius: 0.5em;
+}
+@media only screen and (min-width: 30em) {
+  .portfoliolist aside fieldset {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 48em) {
+  .portfoliolist aside fieldset {
+    width: 40%;
+  }
+}
+.portfoliolist aside legend {
+  font-weight: bold;
+}
+.portfoliolist aside .row {
+  padding: 0.5em;
+  height: 2em;
+}
+.portfoliolist aside label {
+  cursor: pointer;
+  float: left;
+  padding-right: 0.5em;
+  line-height: 2em;
+}
+.portfoliolist aside input[type=number] {
+  font-size: inherit;
+  color: inherit;
+  width: 4em;
+  float: left;
+  line-height: 2em;
+  margin-right: 1em;
+}
+.portfoliolist aside input[type=number]:focus {
+  outline-color: #174573;
+  outline-width: 0.4em;
+}
+.portfoliolist aside input[type=submit] {
+  font-size: inherit;
+  color: inherit;
+  width: 7em;
+  float: left;
+  line-height: 2em;
+  border-radius: 0.5em;
+  background: linear-gradient(to bottom, #174573 0%, #9cf 100%);
+}
+.portfoliolist aside input[type=submit]:disabled {
+  opacity: 0.5;
+}
+.portfoliolist aside h3 {
+  padding: 0.5em 0;
+}
+.portfoliolist aside p {
+  padding: 0.5em 0;
+  clear: both;
+}
+.portfoliolist main {
+  padding: 0.5em 0;
+}
+.portfoliolist .panel {
+  float: left;
+}
+.portfoliolist .panel .panel-heading {
+  font-size: 1.1em;
+  text-align: center;
+}
+.portfoliolist .panel .panel-body {
+  width: 160px;
+  height: 160px;
+  background: #9cf url(images/frame-ls.gif) no-repeat center;
+  margin: 5px 3px;
+}
+.portfoliolist .panel .panel-body img {
+  border: 1px solid #444;
+  border-color: #444 #aaa #aaa #444;
+}
+.portfoliolist .panel.pt .panel-body {
+  background-image: url(images/frame-pt.gif);
+}
+.portfoliolist .panel.ls img {
+  margin: 29px 15px;
+}
+.portfoliolist .panel.pt img {
+  margin: 15px 29px;
+}
+@media only screen and (min-width: 48em) {
+  .portfoliolist aside .panel.ng-enter {
+    animation: slideInRight 0.7s both ease-in;
+  }
+  @keyframes slideInRight {
+    from {
+      transform: translateX(1000%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  .portfoliolist main .panel.ng-hide {
+    animation: slideOutRight 0.7s both ease-in;
+  }
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(1000%);
+    }
+  }
+}
+
+.portfoliodetail header {
+  border-bottom: 0.25em solid #174573;
+  padding: 0.5em;
+}
+.portfoliodetail header a {
+  text-decoration: none;
+}
+.portfoliodetail header a:hover, .portfoliodetail header a:focus {
+  background-color: #174573;
+  color: #fff;
+}
+@media only screen and (min-width: 30em) {
+  .portfoliodetail header nav {
+    float: left;
+  }
+  .portfoliodetail header span {
+    float: right;
+  }
+}
+.portfoliodetail main {
+  padding: 0.5em 0;
+}
+.portfoliodetail main .panel-large h1 {
+  text-align: center;
+}
+.portfoliodetail main .panel-large dl {
+  text-align: center;
+}
+.portfoliodetail main .panel-large dt {
+  font-weight: bold;
+}
+.portfoliodetail main .panel-large img {
+  display: block;
+  box-sizing: border-box;
+  border: #fff solid 5px;
+  box-shadow: 0.25em 0.25em 0.3em #999;
+  margin: 1em auto;
+  max-width: 100%;
+}
+.portfoliodetail main .panel-large button {
+  font-size: inherit;
+  color: inherit;
+  width: 8em;
+  line-height: 2em;
+  border-radius: 0.5em;
+  background: linear-gradient(to bottom, #174573 0%, #9cf 100%);
+  display: block;
+  margin: 0 auto;
+}
+.portfoliodetail main .panel-large button:disabled {
+  opacity: 0.5;
+}
+
+/*# sourceMappingURL=styles.css.map */
