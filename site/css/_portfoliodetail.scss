@@ -11,7 +11,7 @@
 				color: $white;
 			}
 		}
-		@media only screen and (min-width: $break1) {
+		@media only screen and (min-width: $break2) {
 			nav {
 				float: left;
 			}
@@ -35,7 +35,7 @@
 			}
 			img {
 				display: block;
-				box-sizing: border-box;
+				/*box-sizing: border-box;*/
 				border: $white solid 5px;
 				box-shadow: 0.25em 0.25em 0.3em $gray;
 				margin: $margin auto;

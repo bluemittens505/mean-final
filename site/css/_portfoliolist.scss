@@ -5,9 +5,13 @@
 
 		h1 {
 			font-family: 'Bangers', cursive;
-			font-size: 3em;
+			font-size: 2.0em;
 			text-align: center;
 			padding-top: $padding/2;
+
+			@media only screen and (min-width: $break2) {
+				font-size: 3em;
+			}
 		}
 		h2 {
 			font-size: 1em;
@@ -16,63 +20,64 @@
 	}
 	aside {
 		border-bottom: $divider solid $darkblue;
-		padding: $padding;
+		position: relative;
 
-		form {
-			padding: $padding 0;
-		}	
-		fieldset {
-			border-radius: $radius;
-		}
-		@media only screen and (min-width: $break1) {
-			fieldset {
-				width: 60%;
-			}
-		}
-		@media only screen and (min-width: $break2) {
-			fieldset {
-				width: 40%;
-			}
-		}
-		legend {
-			font-weight: bold;
-		}
-		.row {
-			padding: $padding;
-			height: 2em;
-		}
-		label {
-			cursor: pointer;
+		p:nth-child(2) {
 			float: left;
-			padding-right: $padding;
-			line-height: 2em;
+			margin: $margin $margin $margin 0;
 		}
 		input[type=number] {
 			font-size: inherit;
 			color: inherit;
 			width: 4em;
-			float: left;
 			line-height: 2em;
 			margin-right: $margin;
+			float: left;
+			margin: $margin 0;
+
+			@media only screen and (min-width: $break2) {
+				margin: $margin $margin $margin 0;
+			}
 		}
 		input[type=number]:focus {
 			outline-color: $darkblue;
 			outline-width: 0.4em;
 		}
-		input[type=submit] {
+		.btn {
 			font-size: inherit;
 			color: inherit;
-			width: 7em;
-			float: left;
+			width: 5em;
 			line-height: 2em;
 			border-radius: 0.5em;
 			background: linear-gradient(to bottom,$darkblue 0%,$lightblue 100%);
 		}
+		input[type=submit] {
+			float: left;
+			clear: left;
+			margin: 0 0 $margin;
+
+			@media only screen and (min-width: $break2) {
+				clear: none;
+				margin: $margin 0;
+			}
+		}
 		input[type=submit]:disabled {
 			opacity: 0.5;
 		}
-		h3 {
-			padding: $padding 0;
+		button {
+			float: left;
+			margin: 0 0 $margin;
+
+			@media only screen and (min-width: $break2) {
+				margin: $margin 0;
+			}
+		}
+		button:nth-child(3) {
+			margin: 0 $margin/2 $margin;
+
+			@media only screen and (min-width: $break2) {
+				margin: $margin $margin/2;
+			}
 		}
 		p {
 			padding: $padding 0;
@@ -110,7 +115,7 @@
 			margin: 15px 29px;
 		}
 	}
-	@media only screen and (min-width: $break2) {
+	@media only screen and (min-width: $break3) {
 		aside .panel.ng-enter {
 			animation: slideInRight 0.7s both ease-in; 
 		}

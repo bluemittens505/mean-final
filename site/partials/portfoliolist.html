@@ -1,25 +1,19 @@
 <div class="wrapper clear">
-	<div class="portfoliolist">
+	<div class="portfoliolist clear">
 		<header>	
-			<h2>Pick your favorite photos taken in</h2>
+			<h2>Vote for your favorite photos taken in</h2>
 			<h1>Newport, New Jersey</h1>
 		</header>
 		<aside>
 			<div class="alert" ng-show="add_favorite_error_msg" ng-bind="add_favorite_error_msg"></div>
-			<form ng-submit="addFavorite(favorite)" name="favorite_form" novalidate>
-				<fieldset>
-					<legend>Enter a photo id (1 to {{portfolios.length}})</legend>
-					<div class="fields">
-						<div class="row">
-							<label for="f-id">Id</label> 
-							<input type="number" id="f-id" name="id" ng-model="favorite.id" min="1" max="{{portfolios.length}}" required />
-							<input type="submit" value="Add Favorite" ng-disabled="favorite_form.$invalid" />
-						</div>
-					</div>
-				</fieldset>
+			<p>Enter a photo id</p>
+			<form class="clear" ng-submit="addFavorite(favorite)" name="favorite_form" novalidate>
+				<input type="number" name="id" ng-model="favorite.id" min="1" max="{{portfolios.length}}" required />
+				<input class="btn" type="submit" value="Add" ng-disabled="favorite_form.$invalid" />
+				<button class="btn" ng-click="voteFavorites()">Vote</button>
+				<button class="btn" ng-click="resetFavorites()">Reset</button>
 			</form>
-			<h3>Your favorites:</h3>
-			<article class="panel" ng-repeat="portfolio in favorites" ng-class="getOrientation(portfolio.id)">
+			<article class="panel clear" ng-repeat="portfolio in favorites" ng-class="getOrientation(portfolio.id)">
 				<div class="panel-heading"> 
 					<span class="id">#{{portfolio.id}}</span>
 				</div>
@@ -29,7 +23,7 @@
 			</article>
 			<p>You have picked {{favorites.length}} photos so far!</p>
 		</aside>
-		<main>
+		<main class="clear">
 			<article class="panel" ng-repeat="portfolio in portfolios" ng-show="getShowStatus(portfolio.id)" ng-class="getOrientation(portfolio.id)">
 				<div class="panel-heading"> 
 					<span class="id">#{{portfolio.id}}</span>

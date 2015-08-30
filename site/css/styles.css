@@ -1,5 +1,9 @@
 /* Colors */
 /* Breakpoints */
+/* 399px */
+/* 565px */
+/* 731px */
+/* 897px */
 /* Padding, Border, Margins, ... */
 * {
   margin: 0;
@@ -13,11 +17,12 @@ body {
 }
 
 .wrapper {
-  max-width: 60em;
+  max-width: 55em;
   min-height: 60em;
   margin: 0 auto;
-  padding: 0 0.5em 0.5em;
+  padding: 0 1.5625em;
   background-color: #eed;
+  box-sizing: border-box;
 }
 
 .alert {
@@ -38,9 +43,14 @@ body {
 }
 .portfoliolist header h1 {
   font-family: 'Bangers', cursive;
-  font-size: 3em;
+  font-size: 2.0em;
   text-align: center;
   padding-top: 0.25em;
+}
+@media only screen and (min-width: 35.3125em) {
+  .portfoliolist header h1 {
+    font-size: 3em;
+  }
 }
 .portfoliolist header h2 {
   font-size: 1em;
@@ -48,63 +58,68 @@ body {
 }
 .portfoliolist aside {
   border-bottom: 0.25em solid #174573;
-  padding: 0.5em;
+  position: relative;
 }
-.portfoliolist aside form {
-  padding: 0.5em 0;
-}
-.portfoliolist aside fieldset {
-  border-radius: 0.5em;
-}
-@media only screen and (min-width: 30em) {
-  .portfoliolist aside fieldset {
-    width: 60%;
-  }
-}
-@media only screen and (min-width: 48em) {
-  .portfoliolist aside fieldset {
-    width: 40%;
-  }
-}
-.portfoliolist aside legend {
-  font-weight: bold;
-}
-.portfoliolist aside .row {
-  padding: 0.5em;
-  height: 2em;
-}
-.portfoliolist aside label {
-  cursor: pointer;
+.portfoliolist aside p:nth-child(2) {
   float: left;
-  padding-right: 0.5em;
-  line-height: 2em;
+  margin: 1em 1em 1em 0;
 }
 .portfoliolist aside input[type=number] {
   font-size: inherit;
   color: inherit;
   width: 4em;
-  float: left;
   line-height: 2em;
   margin-right: 1em;
+  float: left;
+  margin: 1em 0;
+}
+@media only screen and (min-width: 35.3125em) {
+  .portfoliolist aside input[type=number] {
+    margin: 1em 1em 1em 0;
+  }
 }
 .portfoliolist aside input[type=number]:focus {
   outline-color: #174573;
   outline-width: 0.4em;
 }
-.portfoliolist aside input[type=submit] {
+.portfoliolist aside .btn {
   font-size: inherit;
   color: inherit;
-  width: 7em;
-  float: left;
+  width: 5em;
   line-height: 2em;
   border-radius: 0.5em;
   background: linear-gradient(to bottom, #174573 0%, #9cf 100%);
 }
+.portfoliolist aside input[type=submit] {
+  float: left;
+  clear: left;
+  margin: 0 0 1em;
+}
+@media only screen and (min-width: 35.3125em) {
+  .portfoliolist aside input[type=submit] {
+    clear: none;
+    margin: 1em 0;
+  }
+}
 .portfoliolist aside input[type=submit]:disabled {
   opacity: 0.5;
 }
-.portfoliolist aside h3 {
-  padding: 0.5em 0;
+.portfoliolist aside button {
+  float: left;
+  margin: 0 0 1em;
+}
+@media only screen and (min-width: 35.3125em) {
+  .portfoliolist aside button {
+    margin: 1em 0;
+  }
+}
+.portfoliolist aside button:nth-child(3) {
+  margin: 0 0.5em 1em;
+}
+@media only screen and (min-width: 35.3125em) {
+  .portfoliolist aside button:nth-child(3) {
+    margin: 1em 0.5em;
+  }
 }
 .portfoliolist aside p {
   padding: 0.5em 0;
@@ -139,7 +154,7 @@ body {
 .portfoliolist .panel.pt img {
   margin: 15px 29px;
 }
-@media only screen and (min-width: 48em) {
+@media only screen and (min-width: 45.6875em) {
   .portfoliolist aside .panel.ng-enter {
     animation: slideInRight 0.7s both ease-in;
   }
@@ -175,7 +190,7 @@ body {
   background-color: #174573;
   color: #fff;
 }
-@media only screen and (min-width: 30em) {
+@media only screen and (min-width: 35.3125em) {
   .portfoliodetail header nav {
     float: left;
   }
@@ -197,7 +212,7 @@ body {
 }
 .portfoliodetail main .panel-large img {
   display: block;
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
   border: #fff solid 5px;
   box-shadow: 0.25em 0.25em 0.3em #999;
   margin: 1em auto;

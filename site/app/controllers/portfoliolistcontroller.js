@@ -39,6 +39,7 @@ portfolioApp.controller('PortfolioListController', function( $scope, $firebaseAr
 				$scope.add_favorite_error_msg = '';
 			}
 		};
+		
 	})
 	.catch( function(error) {
 		console.log("Error:", error);

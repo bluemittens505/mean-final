@@ -8,11 +8,12 @@ body {
 	font-family: "Trebuchet MS", "Lucida Grande", "lucida sans unicode", sans-serif;
 }
 .wrapper {
-	max-width: 60em;
+	max-width: 55em;
 	min-height: 60em;
 	margin: 0 auto;
-	padding: 0 $padding $padding;
+	padding: 0 1.5625em;
 	background-color: $beige;
+	box-sizing: border-box;
 }
 .alert {
 	color: $warning;

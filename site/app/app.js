@@ -4,10 +4,10 @@ portfolioApp.config(function ($routeProvider) {
     $routeProvider
     .when("/portfolios",  { 
         controller: "PortfolioListController", 
-        templateUrl: "app/partials/portfoliolist.html" })
+        templateUrl: "../partials/portfoliolist.html" })
     .when("/portfolio/:portfolio_id",  { 
         controller: "PortfolioDetailController", 
-        templateUrl: "app/partials/portfoliodetail.html"  })
+        templateUrl: "../partials/portfoliodetail.html"  })
     .when("/",  {
     	redirectTo: "/portfolios" })
     .otherwise( {
