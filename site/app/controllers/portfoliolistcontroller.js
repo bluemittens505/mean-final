@@ -1,49 +1,72 @@
-portfolioApp.controller('PortfolioListController', function( $scope, $firebaseArray ) {
+portfolioApp.controller('PortfolioListController', ['$scope', 'PortfolioService', 
+	function($scope, PortfolioService) {
 
-	var myFirebaseRef = new Firebase("https://newport-images.firebaseio.com/portfolios");
-	$scope.portfolios = $firebaseArray(myFirebaseRef);
-
-	$scope.favorites = [];
 	$scope.add_favorite_error_msg = '';
 
-	$scope.portfolios.$loaded().then( function() {
+	$scope.portfolios = function() {
+	  	return PortfolioService.portfolios();
+	};
+	
+	// $scope.portfolios = PortfolioService.portfolios();
 
-		var maxid = $scope.portfolios.length;
+	$scope.maxId = function() {
+		return PortfolioService.maxId();
+	};
 
-		$scope.getShowStatus = function (id) {
-			if ( $scope.portfolios[id - 1].picked == true ) {
-				return false;
-			} else {
-				return true;
-			}
-		};
+	$scope.favorites = function() {
+		return PortfolioService.favorites();
+	};
 
-		$scope.getOrientation = function (id) {
-			if ( $scope.portfolios[id - 1].orientation == 'portrait' ) {
-				return 'pt';
-			} else {
-				return 'ls';
-			}
-		};
+	// $scope.favorites = PortfolioService.favorites();
 
-		$scope.addFavorite = function (new_favorite) {
-			if ( new_favorite.id < 1 || new_favorite.id > maxid ) {
-				$scope.add_favorite_error_msg = 'Invalid id. Please pick an id between 1 and ' + maxid + '.';
-			} else if ( $scope.portfolios[new_favorite.id - 1].picked ) {
-				$scope.add_favorite_error_msg = '#' + new_favorite.id + ' is already in your favorites. Please pick another photo.';
-				$scope.favorite = {};
-			} else {
-				$scope.favorites.push($scope.portfolios[new_favorite.id - 1]);
-				$scope.portfolios[new_favorite.id - 1].picked = true;
-				$scope.favorite = {};
-				$scope.add_favorite_error_msg = '';
-			}
-		};
-		
-	})
-	.catch( function(error) {
-		console.log("Error:", error);
-	});
+	$scope.numFavorites = function() {
+		return PortfolioService.numFavorites();
+	};
+
+	// $scope.numFavorites = PortfolioService.numFavorites();
+
+	$scope.getShowStatus = function (id) {
+		if ( PortfolioService.picked(id) == true ) {
+			return false;
+		} else {
+			return true;
+		}
+	};
+
+	$scope.getOrientation = function (id) {
+		if ( PortfolioService.orientation(id) == 'portrait') {
+			return 'pt';
+		} else {
+			return 'ls';
+		}
+	};
+
+	$scope.addFavorite = function (new_favorite) {
+		if ( new_favorite.id < 1 || new_favorite.id > PortfolioService.maxId() ) {
+			$scope.add_favorite_error_msg = 'Invalid id. Please pick an id between 1 and ' + maxid + '.';
+		} else if ( PortfolioService.picked(new_favorite.id)) {
+			$scope.add_favorite_error_msg = '#' + new_favorite.id + ' is already in your favorites. Please pick another photo.';
+			$scope.favorite = {};
+		} else {
+			PortfolioService.addFavorite(new_favorite.id);
+			$scope.add_favorite_error_msg = '';
+			$scope.favorite = {};
+		}
+	};
+
+	$scope.noFavorites = function () {
+		if ( PortfolioService.numFavorites() > 0 ) {
+			return false;
+		} else {
+			return true;
+		}
+	};
+
+	$scope.resetFavorites = function() {
+		PortfolioService.resetFavorites();
+	};
+
+}]);
 
 
 	// var portfolios = [
@@ -388,5 +411,3 @@ portfolioApp.controller('PortfolioListController', function( $scope, $firebaseAr
 	// // This goes after above URL
 	// var myPortfoliosRef = myFirebaseRef.child('portfolios');
 	// myPortfoliosRef.set(portfolios);
-		
-});

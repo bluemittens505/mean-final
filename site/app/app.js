@@ -1,15 +1,20 @@
-var portfolioApp = angular.module('portfolioApp', ['ngRoute', 'ngAnimate', 'firebase']);
+var portfolioApp = angular.module('portfolioApp',['ngRoute','ngAnimate','firebase'])
+.constant("FIREBASE_URL","https://newport-images.firebaseio.com");
 
-portfolioApp.config(function ($routeProvider) {
+portfolioApp.config(['$routeProvider', function($routeProvider) {
     $routeProvider
     .when("/portfolios",  { 
         controller: "PortfolioListController", 
-        templateUrl: "../partials/portfoliolist.html" })
+        templateUrl: "partials/portfoliolist.html"
+    })
     .when("/portfolio/:portfolio_id",  { 
         controller: "PortfolioDetailController", 
-        templateUrl: "../partials/portfoliodetail.html"  })
+        templateUrl: "partials/portfoliodetail.html"
+    })
     .when("/",  {
-    	redirectTo: "/portfolios" })
+    	redirectTo: "/portfolios"
+    })
     .otherwise( {
-    	redirectTo: "/404_page" });
-});
+    	redirectTo: "/404_page"
+    });
+}]);

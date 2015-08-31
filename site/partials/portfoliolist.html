@@ -8,28 +8,28 @@
 			<div class="alert" ng-show="add_favorite_error_msg" ng-bind="add_favorite_error_msg"></div>
 			<p>Enter a photo id</p>
 			<form class="clear" ng-submit="addFavorite(favorite)" name="favorite_form" novalidate>
-				<input type="number" name="id" ng-model="favorite.id" min="1" max="{{portfolios.length}}" required />
+				<input type="number" name="id" ng-model="favorite.id" min="1" max="{{maxId()}}" required />
 				<input class="btn" type="submit" value="Add" ng-disabled="favorite_form.$invalid" />
-				<button class="btn" ng-click="voteFavorites()">Vote</button>
-				<button class="btn" ng-click="resetFavorites()">Reset</button>
+				<button class="btn" ng-click="voteFavorites()" ng-disabled="noFavorites()">Vote</button>
+				<button class="btn" ng-click="resetFavorites()" ng-disabled="noFavorites()">Reset</button>
 			</form>
-			<article class="panel clear" ng-repeat="portfolio in favorites" ng-class="getOrientation(portfolio.id)">
+			<article class="panel clear" ng-repeat="portfolio in favorites()" ng-class="getOrientation(portfolio.id)">
 				<div class="panel-heading"> 
 					<span class="id">#{{portfolio.id}}</span>
 				</div>
 				<div class="panel-body">
-					<a href="index.html#/portfolio/{{portfolio.id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
+					<a href="#/portfolio/{{portfolio.id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
 				</div>
 			</article>
-			<p>You have picked {{favorites.length}} photos so far!</p>
+			<p>You have picked {{numFavorites()}} photos so far!</p>
 		</aside>
 		<main class="clear">
-			<article class="panel" ng-repeat="portfolio in portfolios" ng-show="getShowStatus(portfolio.id)" ng-class="getOrientation(portfolio.id)">
+			<article class="panel" ng-repeat="portfolio in portfolios()" ng-show="getShowStatus(portfolio.id)" ng-class="getOrientation(portfolio.id)">
 				<div class="panel-heading"> 
 					<span class="id">#{{portfolio.id}}</span>
 				</div>
 				<div class="panel-body">
-					<a href="index.html#/portfolio/{{portfolio.id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
+					<a href="#/portfolio/{{portfolio.id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
 				</div>
 			</article>
 		</main>

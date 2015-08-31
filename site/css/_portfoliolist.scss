@@ -61,9 +61,6 @@
 				margin: $margin 0;
 			}
 		}
-		input[type=submit]:disabled {
-			opacity: 0.5;
-		}
 		button {
 			float: left;
 			margin: 0 0 $margin;
@@ -78,6 +75,9 @@
 			@media only screen and (min-width: $break2) {
 				margin: $margin $margin/2;
 			}
+		}
+		button:disabled, input[type=submit]:disabled {
+			opacity: 0.5;
 		}
 		p {
 			padding: $padding 0;
@@ -116,20 +116,42 @@
 		}
 	}
 	@media only screen and (min-width: $break3) {
+
 		aside .panel.ng-enter {
 			animation: slideInRight 0.7s both ease-in; 
 		}
 		@keyframes slideInRight {
-			from  { transform: translateX(1000%); }
-			to    { transform: translateX(0); }
+			from { transform: translateX(1000%); }
+			to   { transform: translateX(0); }
 		}
+
+		aside .panel.ng-leave {
+/*		    transform-origin: 50% 50%;
+    		animation: rotateOutNewspaper .5s both ease-in;*/
+    		animation: scaleDown 0.5s both ease-in;
+		}
+/*		@keyframes rotateOutNewspaper {
+    		to   { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+		}*/
+		@keyframes scaleDown {
+    		to { transform: scale(0.5); opacity: 0; }
+		}
+
 		main .panel.ng-hide {
 			animation: slideOutRight 0.7s both ease-in;
 		}
 		@keyframes slideOutRight {
-			from  { transform: translateX(0); }
-			to    { transform: translateX(1000%); }
-		}			
+			from { transform: translateX(0); }
+			to   { transform: translateX(1000%); }
+		}
+
+/*		main .panel.ng-hide-remove {
+			animation: scaleUp 0.7s both ease-in;
+		}
+		@keyframes scaleUp {
+    		from { transform: scale(0.8); opacity: 0.3; }
+		}*/
+
 	}
 }
 
