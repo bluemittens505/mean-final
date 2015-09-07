@@ -1,83 +1,25 @@
-portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','PortfolioService','FIREBASE_URL',
-	function($scope, $firebaseArray, PortfolioService, FIREBASE_URL) {
+portfolioApp.controller('VotingResultsController', ['$scope','$firebaseArray','FIREBASE_URL',
+	function($scope, $firebaseArray, FIREBASE_URL) {
 
 		var ref = new Firebase(FIREBASE_URL + '/portfolios');
 		$scope.portfolios = $firebaseArray(ref);
-		$scope.message = '';
-
-		$scope.numPortfolios = function () {
-			return $scope.portfolios.length;
-		};
 
 		$scope.getOrientation = function (id) {
-			if ($scope.portfolios[id - 1].orientation == 'portrait') {
+			if ( $scope.portfolios[id - 1].orientation == 'portrait') {
 				return 'pt';
 			} else {
 				return 'ls';
 			}
 		};
 
-		$scope.isFavorite = function (id) {
-			if (PortfolioService.isFavorite(id)) {
-				return true;
-			} else {
-				return false;
+		$scope.getStars = function(id) {
+			var totalvotes = $scope.portfolios[id - 1].totalvotes;
+			var numfullstars = totalvotes/100;
+			var numpartstars = 0;
+			if ( totalvotes%100 > 0 ) {
+				numpartstars = 1;
 			}
-		};
-
-		$scope.isNotFavorite = function (id) {
-			if (PortfolioService.isFavorite(id)) {
-				return false;
-			} else {
-				return true;
-			}
-		};
-
-		$scope.noFavorites = function () {
-			if (PortfolioService.numFavorites() > 0) {
-				return false;
-			} else {
-				return true;
-			}
-		};
-
-		$scope.addFavorite = function (new_favorite) {
-			if (new_favorite.id < 1 || new_favorite.id > $scope.numPortfolios()) {
-				$scope.message = 'Invalid id. Please pick an id between 1 and ' + $scope.numPortfolios() + '.';
-			} else if (PortfolioService.isFavorite(new_favorite.id)) {
-				$scope.message = '#' + new_favorite.id + ' is already in your favorites. Please pick another photo.';
-				$scope.favorite = {};
-			} else {
-				PortfolioService.addFavorite($scope.portfolios[new_favorite.id - 1]);
-				$scope.message = '';
-				$scope.favorite = {};
-			}
-		};
-
-		$scope.favorites = function () {
-			return PortfolioService.favorites();
-		}
-
-		$scope.numFavorites = function () {
-			return PortfolioService.numFavorites();
-		};
-
-		$scope.resetFavorites = function () {
-			PortfolioService.resetFavorites();
-		};
-
-		$scope.voteFavorites = function () {
-			for (var i = 0; i < $scope.numPortfolios(); i++) {
-				for (var j = 0; j < PortfolioService.numFavorites(); j++) {
-					if ($scope.portfolios[i].id == PortfolioService.getFavoriteId(j)) {
-					    $scope.portfolios[i].totalvotes++;
-					    $scope.portfolios.$save(i);
-					    break;
-					};
-				};
-			};
-			PortfolioService.resetFavorites();
-			$scope.message = 'Your vote has been added to the tally.';
+			return '&#x2605;'.repeat(numfullstars) + '&#x2606;'.repeat(numpartstars);
 		};
 
 	}
@@ -93,7 +35,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Hoboken train station during a winter storm.',
 	// imageurl: 'IMG_0331_slide.JPG',
 	// imageurl_large: 'IMG_0331_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 2,
 	// name: '0802',
@@ -102,7 +45,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Hoboken Train Station before a rain storm.',
 	// imageurl: 'IMG_0802_slide.JPG',
 	// imageurl_large: 'IMG_0802_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 3,
 	// name: '0337',
@@ -111,7 +55,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The fish estuary next to the Hoboken train station in winter.',
 	// imageurl: 'IMG_0337_slide.JPG',
 	// imageurl_large: 'IMG_0337_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 4,
 	// name: '0312',
@@ -120,7 +65,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Midtown Manhattan with a view of the Empire State Building.',
 	// imageurl: 'IMG_0312_slide.JPG',
 	// imageurl_large: 'IMG_0312_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 5,
 	// name: '0466',
@@ -129,7 +75,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Midtown Manhattan with a view of the Empire State Building at night.',
 	// imageurl: 'IMG_0466_slide.JPG',
 	// imageurl_large: 'IMG_0466_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 6,
 	// name: '0493',
@@ -138,7 +85,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Empire State Building in colors.',
 	// imageurl: 'IMG_0493_slide.JPG',
 	// imageurl_large: 'IMG_0493_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 7,
 	// name: '0529',
@@ -147,7 +95,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Macy\'s fireworks on the 4th of July.',
 	// imageurl: 'IMG_0529_slide.JPG',
 	// imageurl_large: 'IMG_0529_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 8,
 	// name: '0576',
@@ -156,7 +105,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'More Macy\'s fireworks on the 4th of July.',
 	// imageurl: 'IMG_0576_slide.JPG',
 	// imageurl_large: 'IMG_0576_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 9,
 	// name: '0583',
@@ -165,7 +115,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The promenade behind Laguna.',
 	// imageurl: 'IMG_0583_slide.JPG',
 	// imageurl_large: 'IMG_0583_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 10,
 	// name: '0590',
@@ -174,7 +125,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The promenade behind Laguna with a view of the Freedom Tower.',
 	// imageurl: 'IMG_0590_slide.JPG',
 	// imageurl_large: 'IMG_0590_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 11,
 	// name: '0597',
@@ -183,7 +135,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Three Canadian Geese.',
 	// imageurl: 'IMG_0597_slide.JPG',
 	// imageurl_large: 'IMG_0597_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 12,
 	// name: '0600',
@@ -192,7 +145,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The promenade behind Aquablu.',
 	// imageurl: 'IMG_0600_slide.JPG',
 	// imageurl_large: 'IMG_0600_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 13,
 	// name: '0602',
@@ -201,7 +155,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A view of the Freedom Tower and surrounding buildings from behind Aquablu at Newport.',
 	// imageurl: 'IMG_0602_slide.JPG',
 	// imageurl_large: 'IMG_0602_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 14,
 	// name: '0603',
@@ -210,7 +165,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Midtown Manhattan with a view of the Hudson River and the Empire State Building.',
 	// imageurl: 'IMG_0603_slide.JPG',
 	// imageurl_large: 'IMG_0603_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 15,
 	// name: '0609',
@@ -219,7 +175,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Aquablu at Newport.',
 	// imageurl: 'IMG_0609_slide.JPG',
 	// imageurl_large: 'IMG_0609_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 16,
 	// name: '0628',
@@ -228,7 +185,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Barcelona marigolds in the community garden.',
 	// imageurl: 'IMG_0628_slide.JPG',
 	// imageurl_large: 'IMG_0628_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 17,
 	// name: '0637',
@@ -237,7 +195,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'White lilies in the community garden.',
 	// imageurl: 'IMG_0637_slide.JPG',
 	// imageurl_large: 'IMG_0637_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 18,
 	// name: '0639',
@@ -246,7 +205,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A flower bed in the community garden.',
 	// imageurl: 'IMG_0639_slide.JPG',
 	// imageurl_large: 'IMG_0639_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 19,
 	// name: '0640',
@@ -255,7 +215,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A sunflower in the community garden.',
 	// imageurl: 'IMG_0640_slide.JPG',
 	// imageurl_large: 'IMG_0640_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 20,
 	// name: '0648',
@@ -264,7 +225,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Hydrangea in the community garden.',
 	// imageurl: 'IMG_0648_slide.JPG',
 	// imageurl_large: 'IMG_0648_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 21,
 	// name: '0651',
@@ -273,7 +235,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The East Hampton at Newport.',
 	// imageurl: 'IMG_0651_slide.JPG',
 	// imageurl_large: 'IMG_0651_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 22,
 	// name: '0653',
@@ -282,7 +245,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Pacific at Newport.',
 	// imageurl: 'IMG_0653_slide.JPG',
 	// imageurl_large: 'IMG_0653_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 23,
 	// name: '0660',
@@ -291,7 +255,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A view of the Freedom Tower from behind the East Hampton at Newport.',
 	// imageurl: 'IMG_0660_slide.JPG',
 	// imageurl_large: 'IMG_0660_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 24,
 	// name: '0665',
@@ -300,7 +265,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Atlantic at Newport.',
 	// imageurl: 'IMG_0665_slide.JPG',
 	// imageurl_large: 'IMG_0665_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 25,
 	// name: '0672',
@@ -309,7 +275,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The three flags at River Court.',
 	// imageurl: 'IMG_0672_slide.JPG',
 	// imageurl_large: 'IMG_0672_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 26,
 	// name: '0677',
@@ -318,7 +285,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The promenade behind the Atlantic at Newport with a view of the Freedom Tower.',
 	// imageurl: 'IMG_0677_slide.JPG',
 	// imageurl_large: 'IMG_0677_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 27,
 	// name: '0682',
@@ -327,7 +295,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A sample of the roses found behind the Atlantic at Newport.',
 	// imageurl: 'IMG_0682_slide.JPG',
 	// imageurl_large: 'IMG_0682_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 28,
 	// name: '0706',
@@ -336,7 +305,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Lighthouse behind the Atlantic at Newport.',
 	// imageurl: 'IMG_0706_slide.JPG',
 	// imageurl_large: 'IMG_0706_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 29,
 	// name: '0714',
@@ -345,7 +315,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Riverside at Newport.',
 	// imageurl: 'IMG_0714_slide.JPG',
 	// imageurl_large: 'IMG_0714_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 30,
 	// name: '0721',
@@ -354,7 +325,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'Some boats docked at the Newport Yacht Club and Marina.',
 	// imageurl: 'IMG_0721_slide.JPG',
 	// imageurl_large: 'IMG_0721_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 31,
 	// name: '0732',
@@ -363,7 +335,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A view of the Freedom Tower and the Newport Yacht Club and Marina.',
 	// imageurl: 'IMG_0732_slide.JPG',
 	// imageurl_large: 'IMG_0732_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 32,
 	// name: '0480',
@@ -372,7 +345,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Freedom Tower at twilight.',
 	// imageurl: 'IMG_0480_slide.JPG',
 	// imageurl_large: 'IMG_0480_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 33,
 	// name: '0509',
@@ -381,7 +355,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Freedom Tower at night.',
 	// imageurl: 'IMG_0509_slide.JPG',
 	// imageurl_large: 'IMG_0509_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 34,
 	// name: '0737',
@@ -390,7 +365,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'A big boat docked at the Newport Yacht Club and Marina.',
 	// imageurl: 'IMG_0737_slide.JPG',
 	// imageurl_large: 'IMG_0737_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 35,
 	// name: '0748',
@@ -399,7 +375,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Town Square.',
 	// imageurl: 'IMG_0748_slide.JPG',
 	// imageurl_large: 'IMG_0748_small.JPG',
-	// orientation: 'landscape'},
+	// orientation: 'landscape',
+	// totalvotes: 0},
 
 	// {id: 36,
 	// name: '0781',
@@ -408,7 +385,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The Laguna at Newport.',
 	// imageurl: 'IMG_0781_slide.JPG',
 	// imageurl_large: 'IMG_0781_small.JPG',
-	// orientation: 'portrait'},
+	// orientation: 'portrait',
+	// totalvotes: 0},
 
 	// {id: 37,
 	// name: '0785',
@@ -417,7 +395,8 @@ portfolioApp.controller('PortfolioListController', ['$scope','$firebaseArray','P
 	// description: 'The carousel at Newport Green Park.',
 	// imageurl: 'IMG_0785_slide.JPG',
 	// imageurl_large: 'IMG_0785_small.JPG',
-	// orientation: 'landscape'}
+	// orientation: 'landscape',
+	// totalvotes: 0}
 
 	// ];
 

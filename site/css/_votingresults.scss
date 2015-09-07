@@ -1,0 +1,67 @@
+.votingresults {
+	header {
+		border-bottom: $divider solid $darkblue;
+		padding: 2*$padding 0;
+
+		a {
+			text-decoration: none;
+
+			&:hover, &:focus {
+				background-color: $darkblue;
+				color: $white;
+			}
+		}
+		h1 {
+			font-family: 'Bangers', cursive;
+			font-size: 2.0em;
+			text-align: center;
+			padding-top: $padding/2;
+
+			@media only screen and (min-width: $break2) {
+				font-size: 3em;
+			}
+		}
+	}
+	main {
+		.note {
+			border-bottom: $divider solid $darkblue;	
+		}
+		.stars {
+			font-size: 3em;
+			color: $orange;
+		}
+		article {
+			border-bottom: $divider solid $darkblue;
+		}
+		.panel {
+			margin: $margin/2 0 0;
+
+			@media only screen and (min-width: $break2) {
+				float: left;
+				width: 40%;
+				margin: $margin 0;
+			}
+		}
+		.panel-body {
+			margin-right: auto;
+			margin-left: auto;
+		}
+		.result {
+			@media only screen and (min-width: $break2) {
+				float: left;
+				width: 60%
+			}
+		}
+		.result div:first-child {
+			padding: $padding 0;
+			text-align: center;
+
+			@media only screen and (min-width: $break2) {
+				padding: $padding*4 0 $padding;
+			}
+		}
+		.result div:last-child {
+			word-wrap: break-word;
+		}
+	}
+}

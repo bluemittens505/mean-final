@@ -6,9 +6,10 @@ body {
 	background-color: $white;
 	color: $darkgray;
 	font-family: "Trebuchet MS", "Lucida Grande", "lucida sans unicode", sans-serif;
+	font-size: 1em;
 }
 .wrapper {
-	max-width: 55em;
+	max-width: 56.0625em;
 	min-height: 60em;
 	margin: 0 auto;
 	padding: 0 1.5625em;
@@ -17,6 +18,7 @@ body {
 }
 .alert {
 	color: $warning;
+	padding: $padding 0;
 }
 .clear:after {
 	content: ".";
@@ -24,4 +26,30 @@ body {
 	height: 0;
 	clear: both;
 	visibility: hidden;
+}
+.panel {
+	.panel-heading {
+		font-size: 1.1em;
+		text-align: center;
+	}
+	.panel-body {
+		width: 10em;
+		height: 10em;
+		background: $lightblue url(images/frame-ls.gif) no-repeat center;
+		margin: 0.3125em 0.1875em;
+
+		img {
+			border: 0.0625em solid #444;
+			border-color: #444 #aaa #aaa #444;
+		}
+	}
+	&.pt .panel-body {
+		background-image: url(images/frame-pt.gif);
+	}
+	&.ls img {
+		margin: 1.8125em 0.9375em; 
+	}
+	&.pt img {
+		margin: 0.9375em 1.8125em;
+	}
 }

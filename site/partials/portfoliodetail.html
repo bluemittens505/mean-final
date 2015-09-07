@@ -4,11 +4,11 @@
 			<nav>
 				<a href="#/portfolios"><--- Back to list of photographs</a>
 			</nav>
-			<span class="alert" ng-show="getDisabledStatus(portfolio.id)">One of your favorites</span>
+			<span class="alert" ng-show="isDisabled(portfolio.id)">One of your favorites</span>
 		</header>
 		<main>
-			<div class="alert" ng-show="load_error_msg" ng-bind="load_error_msg"></div>
-			<article class="panel-large" ng-show="!load_error_msg">
+			<div class="alert" ng-show="message" ng-bind="message"></div>
+			<article class="panel-large" ng-show="!message">
 				<h1 ng-bind="portfolio.title"></h1>
 				<dl>
 					<dt>Date Taken:</dt>
@@ -17,7 +17,7 @@
 					<dd>{{portfolio.description}}</dd>
 				</dl>
 				<img ng-src="images/{{portfolio.imageurl_large}}" alt="{{portfolio.title}}" />
-				<button ng-click="addFavorite(portfolio)" ng-disabled="getDisabledStatus(portfolio.id)">Add to Favorites</button>
+				<button ng-click="addFavorite(portfolio)" ng-disabled="isDisabled(portfolio.id)">Add to Favorites</button>
 			</article>
 		</main>
 	</div>

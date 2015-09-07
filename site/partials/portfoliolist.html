@@ -4,32 +4,33 @@
 			<h2>Vote for your favorite photos taken in</h2>
 			<h1>Newport, New Jersey</h1>
 		</header>
-		<aside>
-			<div class="alert" ng-show="add_favorite_error_msg" ng-bind="add_favorite_error_msg"></div>
-			<p>Enter a photo id</p>
+		<aside class="clear">
+			<div class="alert" ng-show="message" ng-bind="message"></div>
 			<form class="clear" ng-submit="addFavorite(favorite)" name="favorite_form" novalidate>
-				<input type="number" name="id" ng-model="favorite.id" min="1" max="{{maxId()}}" required />
-				<input class="btn" type="submit" value="Add" ng-disabled="favorite_form.$invalid" />
-				<button class="btn" ng-click="voteFavorites()" ng-disabled="noFavorites()">Vote</button>
-				<button class="btn" ng-click="resetFavorites()" ng-disabled="noFavorites()">Reset</button>
+				<label for="id">Enter a photo id</label>
+				<input type="number" name="id" id="id" ng-model="favorite.id" min="1" max="{{numPortfolios()}}" required />
+				<input class="btn" type="submit" value="Add to Favorites" ng-disabled="favorite_form.$invalid" />
 			</form>
+			<button class="btn" ng-click="voteFavorites()" ng-disabled="noFavorites()">Vote for Favorites</button>
+			<button class="btn" ng-click="resetFavorites()" ng-disabled="noFavorites()">Reset Favorites</button>
+			<button class="btn"><a href="#/results">Voting Results</a></button>
+			<p>{{numFavorites()}} Favorites:</p>
 			<article class="panel clear" ng-repeat="portfolio in favorites()" ng-class="getOrientation(portfolio.id)">
 				<div class="panel-heading"> 
 					<span class="id">#{{portfolio.id}}</span>
 				</div>
 				<div class="panel-body">
-					<a href="#/portfolio/{{portfolio.id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
+					<a href="#/portfolio/{{portfolio.$id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
 				</div>
 			</article>
-			<p>You have picked {{numFavorites()}} photos so far!</p>
 		</aside>
 		<main class="clear">
-			<article class="panel" ng-repeat="portfolio in portfolios()" ng-show="getShowStatus(portfolio.id)" ng-class="getOrientation(portfolio.id)">
+			<article class="panel" ng-repeat="portfolio in portfolios" ng-show="isNotFavorite(portfolio.id)" ng-class="getOrientation(portfolio.id)">
 				<div class="panel-heading"> 
 					<span class="id">#{{portfolio.id}}</span>
 				</div>
 				<div class="panel-body">
-					<a href="#/portfolio/{{portfolio.id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
+					<a href="#/portfolio/{{portfolio.$id}}"><img ng-src="images/{{portfolio.imageurl}}" alt="{{portfolio.title}}" /></a>
 				</div>
 			</article>
 		</main>

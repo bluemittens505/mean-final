@@ -1,44 +1,32 @@
-portfolioApp.controller("PortfolioDetailController",
-	function($scope,$routeParams,$location,$window,PortfolioService){
-	
-	var id = $routeParams.portfolio_id;
-	$scope.load_error_msg = "";
+portfolioApp.controller('PortfolioDetailController',['$scope','$routeParams','$timeout','PortfolioService','FIREBASE_URL',
+	function($scope, $routeParams, $timeout, PortfolioService, FIREBASE_URL) {
 
-	// var protocol = $location.protocol();
-	// console.log(protocol);
-	// var host = $location.host();
-	// console.log(host);
-	// var port = $location.port();
-	// console.log(port);
+		var fbid = $routeParams.fbid;
+		var ref = new Firebase(FIREBASE_URL + '/portfolios/' + fbid);
+		$scope.message = '';
 
-	// console.log(PortfolioService.portfolios());
-	// console.log(PortfolioService.portfolio(id));
+		ref.once("value", function(snapshot) {
+			$timeout( function() {
+				$scope.portfolio = snapshot.val();
+			    if ( $scope.portfolio === undefined || $scope.portfolio === null ) {
+			    	$scope.message = 'Cannot find the photograph details';
+			    }
+			}, 0);
+		}, function(error) {
+			$scope.message = 'Cannot find the photograph details';
+		});
 
-	var maxid = PortfolioService.maxId();
-	// console.log(maxid);
+		$scope.isDisabled = function(id) {
+			if ( PortfolioService.isFavorite(id) ) {
+				return true;
+			} else {
+				return false;
+			}
+		};
 
-	if ( maxid === undefined || maxid == 0 ) {
-		$scope.load_error_msg = "Data not fully loaded.  Go back to photograph list and try again.";
-		//$window.location.href = protocol + '://' + host + ':' + port;
-		//$location.path("/portfolios").replace();
-	} else if ( id < 1 || id > maxid ) {
-		$scope.load_error_msg = "Cannot find the photograph details";
-	} else {
-		$scope.portfolio = PortfolioService.portfolio(id);
+		$scope.addFavorite = function (new_favorite) {
+			PortfolioService.addFavorite(new_favorite);
+		};
+
 	}
-
-	$scope.getDisabledStatus = function (id) {
-		if ( id === undefined ) {
-			return false;
-		} else if ( PortfolioService.picked(id) == true ) {
-			return true;
-		} else {
-			return false;
-		}
-	};
-
-	$scope.addFavorite = function (new_favorite) {
-		PortfolioService.addFavorite(new_favorite.id);
-	};
-
-});
+]);

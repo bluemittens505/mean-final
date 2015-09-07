@@ -14,10 +14,11 @@ body {
   background-color: #fff;
   color: #30302e;
   font-family: "Trebuchet MS", "Lucida Grande", "lucida sans unicode", sans-serif;
+  font-size: 1em;
 }
 
 .wrapper {
-  max-width: 55em;
+  max-width: 56.0625em;
   min-height: 60em;
   margin: 0 auto;
   padding: 0 1.5625em;
@@ -27,6 +28,7 @@ body {
 
 .alert {
   color: #F93;
+  padding: 0.5em 0;
 }
 
 .clear:after {
@@ -35,6 +37,30 @@ body {
   height: 0;
   clear: both;
   visibility: hidden;
+}
+
+.panel .panel-heading {
+  font-size: 1.1em;
+  text-align: center;
+}
+.panel .panel-body {
+  width: 10em;
+  height: 10em;
+  background: #9cf url(images/frame-ls.gif) no-repeat center;
+  margin: 0.3125em 0.1875em;
+}
+.panel .panel-body img {
+  border: 0.0625em solid #444;
+  border-color: #444 #aaa #aaa #444;
+}
+.panel.pt .panel-body {
+  background-image: url(images/frame-pt.gif);
+}
+.panel.ls img {
+  margin: 1.8125em 0.9375em;
+}
+.panel.pt img {
+  margin: 0.9375em 1.8125em;
 }
 
 .portfoliolist header {
@@ -57,20 +83,26 @@ body {
   text-align: center;
 }
 .portfoliolist aside {
+  padding-bottom: 0.5em;
   border-bottom: 0.25em solid #174573;
   position: relative;
 }
-.portfoliolist aside p:nth-child(2) {
+@media only screen and (min-width: 56.0625em) {
+  .portfoliolist aside form {
+    float: left;
+  }
+}
+.portfoliolist aside label {
   float: left;
   margin: 1em 1em 1em 0;
+  padding: 0.5em 0;
 }
 .portfoliolist aside input[type=number] {
+  float: left;
   font-size: inherit;
   color: inherit;
   width: 4em;
   line-height: 2em;
-  margin-right: 1em;
-  float: left;
   margin: 1em 0;
 }
 @media only screen and (min-width: 35.3125em) {
@@ -85,7 +117,7 @@ body {
 .portfoliolist aside .btn {
   font-size: inherit;
   color: inherit;
-  width: 5em;
+  width: 9em;
   line-height: 2em;
   border-radius: 0.5em;
   background: linear-gradient(to bottom, #174573 0%, #9cf 100%);
@@ -101,116 +133,101 @@ body {
     margin: 1em 0;
   }
 }
+@media only screen and (min-width: 56.0625em) {
+  .portfoliolist aside input[type=submit] {
+    margin: 1em 0.5em 1em 0;
+  }
+}
 .portfoliolist aside button {
   float: left;
+  clear: left;
   margin: 0 0 1em;
 }
 @media only screen and (min-width: 35.3125em) {
   .portfoliolist aside button {
-    margin: 1em 0;
+    clear: none;
+    margin: 0 0.5em 1em 0;
+  }
+  .portfoliolist aside button:nth-child(3) {
+    clear: left;
   }
 }
-.portfoliolist aside button:nth-child(3) {
-  margin: 0 0.5em 1em;
-}
-@media only screen and (min-width: 35.3125em) {
+@media only screen and (min-width: 56.0625em) {
+  .portfoliolist aside button {
+    margin: 1em 0.5em 1em 0;
+  }
   .portfoliolist aside button:nth-child(3) {
-    margin: 1em 0.5em;
+    clear: none;
   }
 }
 .portfoliolist aside button:disabled, .portfoliolist aside input[type=submit]:disabled {
   opacity: 0.5;
 }
+.portfoliolist aside a {
+  font-size: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+}
 .portfoliolist aside p {
   padding: 0.5em 0;
   clear: both;
 }
-.portfoliolist main {
-  padding: 0.5em 0;
-}
-.portfoliolist .panel {
-  float: left;
-}
-.portfoliolist .panel .panel-heading {
-  font-size: 1.1em;
-  text-align: center;
-}
-.portfoliolist .panel .panel-body {
-  width: 160px;
-  height: 160px;
-  background: #9cf url(images/frame-ls.gif) no-repeat center;
-  margin: 5px 3px;
-}
-.portfoliolist .panel .panel-body img {
-  border: 1px solid #444;
-  border-color: #444 #aaa #aaa #444;
-}
-.portfoliolist .panel.pt .panel-body {
-  background-image: url(images/frame-pt.gif);
-}
-.portfoliolist .panel.ls img {
-  margin: 29px 15px;
-}
-.portfoliolist .panel.pt img {
-  margin: 15px 29px;
-}
 @media only screen and (min-width: 45.6875em) {
-  .portfoliolist {
-    /*		@keyframes rotateOutNewspaper {
-        		to   { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-    		}*/
-    /*		main .panel.ng-hide-remove {
-    			animation: scaleUp 0.7s both ease-in;
-    		}
-    		@keyframes scaleUp {
-        		from { transform: scale(0.8); opacity: 0.3; }
-    		}*/
-  }
   .portfoliolist aside .panel.ng-enter {
     animation: slideInRight 0.7s both ease-in;
   }
-  @keyframes slideInRight {
-    from {
-      transform: translateX(1000%);
-    }
-    to {
-      transform: translateX(0);
-    }
-  }
   .portfoliolist aside .panel.ng-leave {
-    /*		    transform-origin: 50% 50%;
-        		animation: rotateOutNewspaper .5s both ease-in;*/
     animation: scaleDown 0.5s both ease-in;
   }
-  @keyframes scaleDown {
-    to {
-      transform: scale(0.5);
-      opacity: 0;
-    }
-  }
+}
+.portfoliolist main {
+  padding: 0.5em 0;
+}
+@media only screen and (min-width: 45.6875em) {
   .portfoliolist main .panel.ng-hide {
     animation: slideOutRight 0.7s both ease-in;
   }
-  @keyframes slideOutRight {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(1000%);
-    }
+}
+@media only screen and (min-width: 24.9375em) {
+  .portfoliolist .panel {
+    float: left;
   }
 }
-
+.portfoliolist .panel-body {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media only screen and (min-width: 24.9375em) {
+  .portfoliolist .panel-body {
+    margin: 0.3125em 0.1875em;
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(1000%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes scaleDown {
+  to {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(1000%);
+  }
+}
 .portfoliodetail header {
   border-bottom: 0.25em solid #174573;
   padding: 0.5em;
-}
-.portfoliodetail header a {
-  text-decoration: none;
-}
-.portfoliodetail header a:hover, .portfoliodetail header a:focus {
-  background-color: #174573;
-  color: #fff;
 }
 @media only screen and (min-width: 35.3125em) {
   .portfoliodetail header nav {
@@ -219,6 +236,13 @@ body {
   .portfoliodetail header span {
     float: right;
   }
+}
+.portfoliodetail header a {
+  text-decoration: none;
+}
+.portfoliodetail header a:hover, .portfoliodetail header a:focus {
+  background-color: #174573;
+  color: #fff;
 }
 .portfoliodetail main {
   padding: 0.5em 0;
@@ -252,6 +276,112 @@ body {
 }
 .portfoliodetail main .panel-large button:disabled {
   opacity: 0.5;
+}
+
+.votingresults header {
+  border-bottom: 0.25em solid #174573;
+  padding: 1em 0;
+}
+.votingresults header a {
+  text-decoration: none;
+}
+.votingresults header a:hover, .votingresults header a:focus {
+  background-color: #174573;
+  color: #fff;
+}
+.votingresults header h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 2.0em;
+  text-align: center;
+  padding-top: 0.25em;
+}
+@media only screen and (min-width: 35.3125em) {
+  .votingresults header h1 {
+    font-size: 3em;
+  }
+}
+.votingresults main .note {
+  border-bottom: 0.25em solid #174573;
+}
+.votingresults main .stars {
+  font-size: 3em;
+  color: #FC0;
+}
+.votingresults main article {
+  border-bottom: 0.25em solid #174573;
+}
+.votingresults main .panel {
+  margin: 0.5em 0 0;
+}
+@media only screen and (min-width: 35.3125em) {
+  .votingresults main .panel {
+    float: left;
+    width: 40%;
+    margin: 1em 0;
+  }
+}
+.votingresults main .panel-body {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media only screen and (min-width: 35.3125em) {
+  .votingresults main .result {
+    float: left;
+    width: 60%;
+  }
+}
+.votingresults main .result div:first-child {
+  padding: 0.5em 0;
+  text-align: center;
+}
+@media only screen and (min-width: 35.3125em) {
+  .votingresults main .result div:first-child {
+    padding: 2em 0 0.5em;
+  }
+}
+.votingresults main .result div:last-child {
+  word-wrap: break-word;
+}
+
+.page404 h1 {
+  font-size: 4em;
+  text-align: center;
+  color: #F00;
+}
+@media only screen and (min-width: 35.3125em) {
+  .page404 h1 {
+    font-size: 7em;
+  }
+}
+.page404 h2 {
+  font-size: 6em;
+  font-family: 'Bangers', cursive;
+  text-align: center;
+}
+@media only screen and (min-width: 35.3125em) {
+  .page404 h2 {
+    font-size: 9em;
+  }
+}
+.page404 h3 {
+  font-size: 7em;
+  font-family: 'Bangers', cursive;
+  text-align: center;
+}
+@media only screen and (min-width: 35.3125em) {
+  .page404 h3 {
+    font-size: 11em;
+  }
+}
+.page404 a {
+  text-decoration: none;
+  margin: 1em auto;
+  display: block;
+  text-align: center;
+}
+.page404 a:hover, .page404 a:focus {
+  background: #30302e;
+  color: #fff;
 }
 
 /*# sourceMappingURL=styles.css.map */

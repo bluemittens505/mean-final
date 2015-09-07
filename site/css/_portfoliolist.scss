@@ -19,20 +19,26 @@
 		}
 	}
 	aside {
+		padding-bottom: $padding;
 		border-bottom: $divider solid $darkblue;
 		position: relative;
 
-		p:nth-child(2) {
+		@media only screen and (min-width: $break4) {
+			form {
+				float: left;
+			}
+		}
+		label {
 			float: left;
 			margin: $margin $margin $margin 0;
+			padding: $padding 0;
 		}
 		input[type=number] {
+			float: left;
 			font-size: inherit;
 			color: inherit;
 			width: 4em;
 			line-height: 2em;
-			margin-right: $margin;
-			float: left;
 			margin: $margin 0;
 
 			@media only screen and (min-width: $break2) {
@@ -46,7 +52,7 @@
 		.btn {
 			font-size: inherit;
 			color: inherit;
-			width: 5em;
+			width: 9em;
 			line-height: 2em;
 			border-radius: 0.5em;
 			background: linear-gradient(to bottom,$darkblue 0%,$lightblue 100%);
@@ -60,98 +66,86 @@
 				clear: none;
 				margin: $margin 0;
 			}
+			@media only screen and (min-width: $break4) {
+				margin: $margin $margin/2 $margin 0;
+			}
 		}
 		button {
 			float: left;
+			clear: left;
 			margin: 0 0 $margin;
 
 			@media only screen and (min-width: $break2) {
-				margin: $margin 0;
-			}
-		}
-		button:nth-child(3) {
-			margin: 0 $margin/2 $margin;
+				clear: none;
+				margin: 0 $margin/2 $margin 0;
 
-			@media only screen and (min-width: $break2) {
-				margin: $margin $margin/2;
+				&:nth-child(3) {
+					clear: left;
+				}
+			}
+			@media only screen and (min-width: $break4) {
+				margin: $margin $margin/2 $margin 0;
+
+				&:nth-child(3) {
+					clear: none;
+				}
 			}
 		}
 		button:disabled, input[type=submit]:disabled {
 			opacity: 0.5;
 		}
+		a {
+			font-size: inherit;
+			color: inherit;
+			text-decoration: none;
+			cursor: default;
+		}
 		p {
 			padding: $padding 0;
 			clear: both;
 		}
+
+		@media only screen and (min-width: $break3) {
+			.panel.ng-enter {
+				animation: slideInRight 0.7s both ease-in; 
+			}
+			.panel.ng-leave {
+				animation: scaleDown 0.5s both ease-in;
+			}
+		}		
 	}
 	main {
 		padding: $padding 0;
-	}
-	.panel {
-		float: left;
 
-		.panel-heading {
-			font-size: 1.1em;
-			text-align: center;
-		}
-		.panel-body {
-			width: 160px;
-			height: 160px;
-			background: $lightblue url(images/frame-ls.gif) no-repeat center;
-			margin: 5px 3px;
-
-			img {
-				border: 1px solid #444;
-				border-color: #444 #aaa #aaa #444;
+		@media only screen and (min-width: $break3) {
+			.panel.ng-hide {
+				animation: slideOutRight 0.7s both ease-in; 
 			}
 		}
-		&.pt .panel-body {
-			background-image: url(images/frame-pt.gif);
-		}
-		&.ls img {
-			margin: 29px 15px; 
-		}
-		&.pt img {
-			margin: 15px 29px;
+	}
+	.panel {
+
+		@media only screen and (min-width: $break1) {		
+			float: left;
 		}
 	}
-	@media only screen and (min-width: $break3) {
+	.panel-body {
+		margin-right: auto;
+		margin-left: auto;
 
-		aside .panel.ng-enter {
-			animation: slideInRight 0.7s both ease-in; 
+		@media only screen and (min-width: $break1) {
+			margin: 0.3125em 0.1875em;
 		}
-		@keyframes slideInRight {
-			from { transform: translateX(1000%); }
-			to   { transform: translateX(0); }
-		}
-
-		aside .panel.ng-leave {
-/*		    transform-origin: 50% 50%;
-    		animation: rotateOutNewspaper .5s both ease-in;*/
-    		animation: scaleDown 0.5s both ease-in;
-		}
-/*		@keyframes rotateOutNewspaper {
-    		to   { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-		}*/
-		@keyframes scaleDown {
-    		to { transform: scale(0.5); opacity: 0; }
-		}
-
-		main .panel.ng-hide {
-			animation: slideOutRight 0.7s both ease-in;
-		}
-		@keyframes slideOutRight {
-			from { transform: translateX(0); }
-			to   { transform: translateX(1000%); }
-		}
-
-/*		main .panel.ng-hide-remove {
-			animation: scaleUp 0.7s both ease-in;
-		}
-		@keyframes scaleUp {
-    		from { transform: scale(0.8); opacity: 0.3; }
-		}*/
-
+	}
+	@keyframes slideInRight {
+		from { transform: translateX(1000%); }
+		to   { transform: translateX(0); }
+	}
+	@keyframes scaleDown {
+		to { transform: scale(0.5); opacity: 0; }
+	}
+	@keyframes slideOutRight {
+		from { transform: translateX(0); }
+		to   { transform: translateX(1000%); }
 	}
 }
-
